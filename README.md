@@ -88,4 +88,3 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :buying_record
-- belongs_to :item
