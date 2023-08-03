@@ -58,8 +58,7 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :user
-- has_many :buying_records
-- has_one :addresses
+- has_one :buying_record
 
 
 ## buying_records テーブル
@@ -67,11 +66,12 @@ Things you may want to cover:
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :addresses
+- has_one :address
 
 
 ## addresses テーブル
@@ -88,3 +88,4 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :buying_record
+- belongs_to :item
