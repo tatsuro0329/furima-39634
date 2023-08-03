@@ -26,11 +26,17 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| name               | string  | null: false |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| last_name          | string  | null: false |
+| first_name         | string  | null: false |
+| last_name_kana     | string  | null: false |
+| first_name_kana    | string  | null: false |
+| birth_day          | integer | null: false |
+
 
 ### Association
 - has_many :items
@@ -40,15 +46,15 @@ Things you may want to cover:
 ## items テーブル
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
-| description        | string  | null: false |
+| description        | text    | null: false |
 | item_name          | string  | null: false |
-| picture            | img     | null: false |
-| category           | string  | null: false |
-| condition          | string  | null: false |
-| Delivery_charge    | integer | null: false |
-| sender             | string  | null: false |
+| category_id        | string  | null: false |
+| condition_id       | string  | null: false |
+| delivery_charge_id | integer | null: false |
+| sender_id          | string  | null: false |
 | price              | integer | null: false |
-| days_to_ship       | integer | null: false |
+| days_to_ship_id    | integer | null: false |
+| user_id            | integer | null: false |
 
 ### Association
 - belongs_to :users
@@ -60,10 +66,11 @@ Things you may want to cover:
 
 | Column             | Type     | Options     |
 | ------------------ | -------- | ----------- |
-| users_id           | integer  | null: false |
+| user_id           | integer  | null: false |
 
 ### Association
 - belongs_to :items
+- has_one :address
 
 
 ## address テーブル
@@ -71,12 +78,13 @@ Things you may want to cover:
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
 | post_code          | string  | null: false |
-| prefectures        | string  | null: false |
+| sender_id          | string  | null: false |
 | municipalities     | string  | null: false |
-| house_number       | integer | null: false |
-| Building_name      | string  | null: false |
-| Delivery charge    | integer | null: false |
-| tel                | integer | null: false |
+| house_number       | string  | null: false |
+| building_name      | string  | null: false |
+| delivery_charge    | string  | null: false |
+| tel                | string  | null: false |
 
 ### Association
-- has_one :address
+- has_one :items
+- has_one :buying_records
