@@ -10,5 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_122359) do
+  create_table "articles", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "text", null: false
+    t.integer "category_id", null: false
+    t.integer "condition_id", null: false
+    t.integer "delivery_charge_id", null: false
+    t.integer "sender_id", null: false
+    t.integer "days_to_ship_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
