@@ -82,12 +82,7 @@ end
 group :production do
   gem 'pg'
 end
-<<<<<<< HEAD
-  
-gem 'active_hash'
-=======
 
 gem 'active_hash'
 gem 'devise'
 gem 'pry-rails'
->>>>>>> e27efdbaa02f570687175f0a809e11de266d9023
