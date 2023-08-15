@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-# 不要なmigrationファイルは削除
-
 class DeviseCreateUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :users do |t|
