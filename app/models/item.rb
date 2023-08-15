@@ -3,8 +3,8 @@ class Item < ApplicationRecord
   
   validates :image, :title, :text, :category_id, :condition_id, :delivery_charge_id, :sender_id, :days_to_ship_id, :price, presence: true
   validates :category_id, :condition_id, :delivery_charge_id, :sender_id, :days_to_ship_id, :price, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :price, format: { with: /\A[0-9]+\z/, message: "は半角数字のみ使用してください" }
-  validates :price, numericality: {
+  validates :price, numericality: { only_integer: true, message: "は半角数字のみ使用してください" }
+  validates :price, numericalitwy: {
     only_integer: true,
     greater_than_or_equal_to: 300,
     less_than_or_equal_to: 9999999,
