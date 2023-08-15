@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_log_in, only: [:new]
 
   def index
+    @items = Item.includes(:user).order("created_at DESC")
     @items = Item.all
   end
 
