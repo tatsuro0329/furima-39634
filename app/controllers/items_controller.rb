@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :destroy]
   before_action :move_to_log_in, only: [:new, :edit]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :not_sign_in_actionm, only: [:edit, :destroy]
@@ -25,7 +26,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to root_path(@item)
+    redirect_to root_path
   end
 
   def edit
@@ -55,8 +56,8 @@ class ItemsController < ApplicationController
   end
 
   def not_sign_in_action
-    unless user_signed_in? && current_user.id == @item.user_id
-      redirect_to root_path(@item)
+    unless current_user.id == @item.user_id
+      redirect_to root_path
     end
   end
 
