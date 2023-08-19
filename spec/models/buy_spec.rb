@@ -74,18 +74,16 @@ RSpec.describe Buy, type: :model do
       @buy.valid?
       expect(@buy.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
-      it 'telが10桁未満かつ11桁より多い場合' do
-      # 10桁未満のケース
+      it 'telが9桁以下では登録できないこと' do
       @buy.tel = '012345678'
       @buy.valid?
       expect(@buy.errors.full_messages).to include('Tel must be 10 or 11 digits')
-    
-      # 11桁より多いケース
+      end
+      it 'telが12桁以上では登録できないこと' do
       @buy.tel = '012345678901'
       @buy.valid?
       expect(@buy.errors.full_messages).to include('Tel must be 10 or 11 digits')
       end
-    
       it 'telが半角数値でない場合' do
       @buy.tel = '01234abcd5'
       @buy.valid?
