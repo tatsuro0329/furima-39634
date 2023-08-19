@@ -5,7 +5,6 @@ class BuyingRecordsController < ApplicationController
   before_action :ensure_not_sold, only: [:index]
 
   def index
-    @item = Item.find(params[:item_id])
     if current_user.id == @item.user_id
       redirect_to root_path
       return
@@ -17,7 +16,6 @@ class BuyingRecordsController < ApplicationController
   def create
     @buy = Buy.new(buying_record_params)
     if @buy.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       buy_item
       @buy.save
       return redirect_to root_path
@@ -33,6 +31,7 @@ class BuyingRecordsController < ApplicationController
   end
 
   def buy_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     item = Item.find(params[:item_id])
     Payjp::Charge.create(
       amount: item.price,
