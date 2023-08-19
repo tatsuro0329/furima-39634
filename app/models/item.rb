@@ -17,7 +17,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :sender
   belongs_to_active_hash :days_to_ship
   belongs_to :user
+  has_one :buying_record
 
   has_one_attached :image
-
 end

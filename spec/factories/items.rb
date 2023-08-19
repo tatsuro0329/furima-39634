@@ -2,13 +2,13 @@ FactoryBot.define do
   # include ActionDispatch::TestProcess
   factory :item do
 
-    title           { Faker::Lorem.sentence }
-    text            { Faker::Lorem.paragraph }
-    category        { Category.all.sample }
-    condition       { Condition.all.sample }
-    delivery_charge { DeliveryCharge.all.sample }
-    sender          { Sender.all.sample }
-    days_to_ship    { DaysToShip.all.sample } 
+    title              { Faker::Lorem.sentence }
+    text               { Faker::Lorem.paragraph }
+    category_id        { Category.where.not(id: 1).pluck(:id).sample }
+    condition_id       { Condition.where.not(id: 1).pluck(:id).sample }
+    delivery_charge_id { DeliveryCharge.where.not(id: 1).pluck(:id).sample }
+    sender_id          { Sender.where.not(id: 1).pluck(:id).sample }
+    days_to_ship_id    { DaysToShip.where.not(id: 1).pluck(:id).sample }
 
     after(:build) do |message|
       message.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
@@ -22,5 +22,6 @@ FactoryBot.define do
     price           { Faker::Number.within(range: 300..9999999).to_s.tr('0-9', '０-９') }
     end
   
+    association :user
   end
 end
