@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_020901) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_023955) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_020901) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "addresses", charset: "utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.integer "sender_id", null: false
+    t.string "municipalities", null: false
+    t.string "house_number", null: false
+    t.string "building_name"
+    t.string "tel", null: false
+    t.bigint "buying_record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buying_record_id"], name: "index_addresses_on_buying_record_id"
+  end
+
+  create_table "buying_records", charset: "utf8", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_buying_records_on_item_id"
+    t.index ["user_id"], name: "index_buying_records_on_user_id"
+  end
+
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "text", null: false
@@ -48,10 +70,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_020901) do
     t.integer "sender_id", null: false
     t.integer "days_to_ship_id", null: false
     t.integer "price", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "orders", charset: "utf8", force: :cascade do |t|
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -74,5 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_020901) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "buying_records"
+  add_foreign_key "buying_records", "items"
+  add_foreign_key "buying_records", "users"
   add_foreign_key "items", "users"
 end

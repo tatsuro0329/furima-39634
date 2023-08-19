@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :move_to_log_in, only: [:new, :edit]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :not_sign_in_action, only: [:edit, :destroy]
+  before_action :ensure_not_sold, only: [:edit]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -61,4 +62,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def ensure_not_sold
+    if @item.buying_record.present?
+      redirect_to root_path
+    end
+  end
 end
