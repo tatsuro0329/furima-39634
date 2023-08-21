@@ -14,6 +14,7 @@ class BuyingRecordsController < ApplicationController
   end
   
   def create
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @buy = Buy.new(buying_record_params)
     if @buy.valid?
       buy_item
