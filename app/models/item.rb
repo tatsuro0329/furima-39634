@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   
   validates :image, :title, :text, :category_id, :condition_id, :delivery_charge_id, :sender_id, :days_to_ship_id, :price, presence: true
-  validates :category_id, :condition_id, :delivery_charge_id, :sender_id, :days_to_ship_id, :price, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :category_id, :condition_id, :delivery_charge_id, :sender_id, :days_to_ship_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :price, numericality: { only_integer: true, message: "は半角数字のみ使用してください" }
   validates :price, numericality: {
     only_integer: true,
